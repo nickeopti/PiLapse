@@ -1,0 +1,11 @@
+bin/
+build/
+dist/
+
+# For intellij
+.idea
+*.iml
+out/
+
+# For Dolphin (KDE Linux)
+.directory
