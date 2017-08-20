@@ -1,5 +1,13 @@
 # PiLapse
 
+PiLapse is a project that uses a Raspberry Pi with a connected camera to capture images for use as timelapses.
+It automatically detects when there is motion, and begins to record images. You can set the pace yourself, but the default is two images every minute.
+
+> This project was originally developed to be used as a part of [Svendborg Tekniske Gymnasium](http://svend-es.dk/teknisk-gymnasium-htx/)'s 2017 [robotics contest](https://sites.google.com/svend-es.dk/sit/sit-comp-robotics?authuser=0), where it should make timelapses of the development and building of the courses as well as the competition itself, intended for branding purposes
+
+Below here, you can find all the necessary information on how to get your own PiLapse system up and running.
+
+
 ## Installing Raspbian
 
 > This assumes that you have internet connectivity on your Raspberry Pi
@@ -63,5 +71,50 @@ While still in the `raspi-config` menu
  + Hit `Enter` to reboot now
  + Alternatively, you can reboot manually by typing `sudo reboot now`
  + The next boot will take longer than usual
+
+
+## Installing Required Components
+
+### Installing Java
+To install Oracle Java 8 JDK:
+ + Type `sudo apt-get install oracle-java8.jdk` and hit `Enter`
+ + When prompted, type `Y` and hit `Enter` to confirm
+ + Wait...
+ + Once it has finished, verify the installation by typing `java -version`, hit `Enter` and check the output
  
-> https://raspberrypi.stackexchange.com/questions/8734/execute-script-on-start-up
+### Installing Apache webserver
+To install Apache 2 webserver:
+ + Type `sudo apt-get install apache2` and hit `Enter`
+ + When prompted, type `Y` and hit `Enter` to confirm
+ + Wait...
+ + Once finished, you can verify the installation, if you want, by doing:
+     + Determine the Pi's IP-address by typing `hostname -I` and hit `Enter` on the Pi
+     + Type in the IP-address of the Pi, as an URL in your webbrowser on your regular computer (requires you to be on the same local network as the Pi)
+     + If you see an ugly webpage named `Apache2 Debian Default Page`, that says `It works!`, then it, well, works
+
+
+## SFTP
+As SSH is already enabled on the Pi, you just need a client on your regular computer to access the filesystem of the Pi remotely. Several different clients exists, but here is instructions for using FileZilla:
+ + Download and install [FileZilla Client](https://filezilla-project.org/download.php?type=client) on your regular computer
+ + Once successfully installed, go to `File -> Site Manager...` and click `New Site`
+ + Type in the IP-address of the Pi as `Host` and leave `Port` blank
+     + You can determine the Pi's IP-address by typing `hostname -I` and hit `Enter` on the Pi
+ + Set `Logon Type` to `Normal`
+ + `User` is `pi`
+ + `Password` is `raspberry`, unless you have actively changed it
+ + Click `Connect` and wait
+ + You should now see your own computer's filesystem to the bottom left and the Pi's filesystem to the rigth
+     + Navigate into folders by double-clicking on them, and go back 'up' the filetree by doubleclicking on `..`
+     + Copy a file from either computer by double-clicking on the file, and it will automatically be copied to the other machine. It will be copied into the currently shown folder on the other machine. This works both ways
+
+
+## Autorun the Application
+In order to make this project truly 'plug-and-play', the PiLapse application should automatically be launched, when the Pi has booted. Instructions for making this happens is as follows:
+ + Type `sudo nano /etc/rc.local` and hit `Enter`. This opens up the nano-editor
+ + Add a (couple of) newline(s) in the file, just before the line `exit 0`, and
+ + Type `java -jar /home/pi/PiLapse.jar&`
+ + Press `Ctrl + O`, then `Enter`, and finally `Ctrl + X`
+ + Now the application should automatically launch when the Pi boots
+ + You can verify by rebooting your Pi; type `sudo reboot now` and hit `Enter`
+
+
