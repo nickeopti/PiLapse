@@ -65,3 +65,23 @@ While still in the `raspi-config` menu
  + The next boot will take longer than usual
  
 > https://raspberrypi.stackexchange.com/questions/8734/execute-script-on-start-up
+
+
+## Installing Required Components
+
+### Installing Java
+To install Oracle Java 8 JDK:
+ + Type `sudo apt-get install oracle-java8.jdk` and hit `Enter`
+ + When prompted, type `Y` and hit `Enter` to confirm
+ + Wait...
+ + Once it has finished, verify by typing `java -version`, hit `Enter` and check the output
+ 
+### Installing Apache webserver
+To install Apache 2 webserver:
+ + Type `sudo apt-get install apache2` and hit `Enter`
+ + When prompted, type `Y` and hit `Enter` to confirm
+ + Wait...
+ + If you want, you can verify by typing in the IP-address of the Pi, as an URL in your webbrowser on your regular computer (requires you to be on the same local network as the Pi)
+     + You can determine the Pi's IP-address by typing `hostname -I` and hit `Enter`
+     + If you see an ugly webpage named `Apache2 Debian Default Page`, that says `It works!`, then it, well, works
+
