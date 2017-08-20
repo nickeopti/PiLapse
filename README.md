@@ -86,3 +86,17 @@ To install Apache 2 webserver:
      + Type in the IP-address of the Pi, as an URL in your webbrowser on your regular computer (requires you to be on the same local network as the Pi)
      + If you see an ugly webpage named `Apache2 Debian Default Page`, that says `It works!`, then it, well, works
 
+## SFTP
+As SSH is already enabled on the Pi, you just need a client on your regular computer to access the filesystem of the Pi remotely. Several different clients exists, but here is instructions for using FileZilla:
+ + Download and install [FileZilla Client](https://filezilla-project.org/download.php?type=client) on your regular computer
+ + Once successfully installed, go to `File -> Site Manager...` and click `New Site`
+ + Type in the IP-address of the Pi as `Host` and leave `Port` blank
+     + You can determine the Pi's IP-address by typing `hostname -I` and hit `Enter` on the Pi
+ + Set `Logon Type` to `Normal`
+ + `User` is `pi`
+ + `Password` is `raspberry`, unless you have actively changed it
+ + Click `Connect` and wait
+ + You should now see your own computer's filesystem to the bottom left and the Pi's filesystem to the rigth
+     + Navigate into folders by double-clicking on them, and go back 'up' the filetree by doubleclicking on `..`
+     + Copy a file from either computer by double-clicking on the file, and it will automatically be copied to the other machine. It will be copied into the currently shown folder on the other machine. This works both ways
+
