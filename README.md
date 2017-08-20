@@ -1,5 +1,13 @@
 # PiLapse
 
+PiLapse is a project that uses a Raspberry Pi with a connected camera to capture images for use as timelapses.
+It automatically detects when there is motion, and begins to record images. You can set the pace yourself, but the default is two images every minute.
+
+> This project was originally developed to be used as a part of [Svendborg Tekniske Gymnasium](http://svend-es.dk/teknisk-gymnasium-htx/)'s 2017 [robotics contest](https://sites.google.com/svend-es.dk/sit/sit-comp-robotics?authuser=0), where it should make timelapses of the development and building of the courses as well as the competition itself, intended for branding purposes
+
+Below here, you can find all the necessary information on how to get your own PiLapse system up and running.
+
+
 ## Installing Raspbian
 
 > This assumes that you have internet connectivity on your Raspberry Pi
