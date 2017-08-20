@@ -74,14 +74,15 @@ To install Oracle Java 8 JDK:
  + Type `sudo apt-get install oracle-java8.jdk` and hit `Enter`
  + When prompted, type `Y` and hit `Enter` to confirm
  + Wait...
- + Once it has finished, verify by typing `java -version`, hit `Enter` and check the output
+ + Once it has finished, verify the installation by typing `java -version`, hit `Enter` and check the output
  
 ### Installing Apache webserver
 To install Apache 2 webserver:
  + Type `sudo apt-get install apache2` and hit `Enter`
  + When prompted, type `Y` and hit `Enter` to confirm
  + Wait...
- + If you want, you can verify by typing in the IP-address of the Pi, as an URL in your webbrowser on your regular computer (requires you to be on the same local network as the Pi)
-     + You can determine the Pi's IP-address by typing `hostname -I` and hit `Enter`
+ + Once finished, you can verify the installation, if you want, by doing:
+     + Determine the Pi's IP-address by typing `hostname -I` and hit `Enter` on the Pi
+     + Type in the IP-address of the Pi, as an URL in your webbrowser on your regular computer (requires you to be on the same local network as the Pi)
      + If you see an ugly webpage named `Apache2 Debian Default Page`, that says `It works!`, then it, well, works
 
