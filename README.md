@@ -52,7 +52,7 @@ While still in the `raspi-config` menu
  + Select `P2 SSH` and hit `Enter`
  + Select `Yes` and hit `Enter`
  
-### Something
+### Expand Filesystem
 While still in the `raspi-config` menu
  + Select `7 Advanced Options` and hit `Enter`
  + Select `A1 Expand Filesystem` and hit `Enter`
@@ -62,5 +62,5 @@ While still in the `raspi-config` menu
  + Click `Rightarrow key` twice to select `Finish` and hit `Enter`
  + Hit `Enter` to reboot now
  + Alternatively, you can reboot manually by typing `sudo reboot now`
-
+ + The next boot will take longer than usual
  
