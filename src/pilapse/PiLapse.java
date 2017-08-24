@@ -93,11 +93,6 @@ public class PiLapse {
             //Logger.getLogger(PiLapse.class.getName()).log(Level.SEVERE, null, ex);
         }
         for(int i = 10; i >= 0;  i--) {
-            /*try {
-                Files.move(new File(BUF_DIR + "img" + i + ".jpg").toPath(), new File(BUF_DIR + "img" + (i+1) + ".jpg").toPath());
-            } catch (IOException ex) {
-                //Logger.getLogger(PiLapse.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
             new File(BUF_DIR + "img" + i + ".jpg").renameTo(new File(BUF_DIR + "img" + (i+1) + ".jpg"));
         }
     }
@@ -111,6 +106,10 @@ public class PiLapse {
         }
         
         return IMG_DIR + "img" + (fileNumber++) + ".jpg";
+    }
+    
+    public static void calculateBrightness() {
+        
     }
     
 }
