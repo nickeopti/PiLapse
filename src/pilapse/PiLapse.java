@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -14,7 +16,7 @@ public class PiLapse {
     
     static final String BUF_DIR = "/home/pi/Pictures/PiLapse/Buf/";
     static final String IMG_DIR = "/home/pi/Pictures/PiLapse/Img/";
-    static int SHUTTER_SPEED = 10_000;
+    static int SHUTTER_SPEED = 40_000;
     
     static int fileNumber = -1;
     
@@ -22,7 +24,7 @@ public class PiLapse {
         System.out.println("PiLapse is booting...");
         
         ProcessBuilder imageCapture = new ProcessBuilder("raspistill", "-n", "-t", "1000", "-w", "1920", "-h", "1080",
-                "-ex", "off", "-awb", "off", "-ifx", "none", /*"-ss", ""+SHUTTER_SPEED,*/ "-ISO", "400",
+                "-ex", "off", "-awb", "auto", "-awbg", "1.5,1.2", "-ifx", "none", "-ss", ""+SHUTTER_SPEED, "-ISO", "400",
                 "-o", BUF_DIR + "img0.jpg");
         clearBuffer();
         
@@ -30,6 +32,9 @@ public class PiLapse {
         while(true) {
             long startTime = System.currentTimeMillis();
             updateBuffer();
+            imageCapture = new ProcessBuilder("raspistill", "-n", "-t", "1000", "-w", "1920", "-h", "1080",
+                "-ex", "off", "-awb", "auto", "-awbg", "1.5,1.2", "-ifx", "none", "-ss", ""+SHUTTER_SPEED, "-ISO", "400",
+                "-o", BUF_DIR + "img0.jpg");
             imageCapture.start();
             System.out.println("Image captured");
             
@@ -51,6 +56,7 @@ public class PiLapse {
             } else {
                 System.out.println("No movement registered");
             }
+            adjustBrightness();
             System.out.println("Execution time: " + (System.currentTimeMillis()-startTime) + " ms");
             Thread.sleep(Math.max(10_000-(System.currentTimeMillis()-startTime), 0));
         }
@@ -108,8 +114,34 @@ public class PiLapse {
         return IMG_DIR + "img" + (fileNumber++) + ".jpg";
     }
     
-    public static void calculateBrightness() {
-        
+    public static double calculateBrightness(BufferedImage img) {
+        int sum = 0, count = 0;
+        for(int x = 0; x < 1920; x += 2) {
+            for(int y = 0; y < 1080; y += 2) {
+                Color c = new Color(img.getRGB(x, y), true);
+                sum += (c.getRed()+c.getGreen()+c.getBlue())/3d;
+                count++;
+            }
+        }
+        return ((double) sum) / count;
+    }
+    
+    public static void adjustBrightness() {
+        double sum = 0, count = 0;
+        for(int i = 10; i >= 0;  i--) {
+            try {
+                sum += calculateBrightness(ImageIO.read(new File(BUF_DIR + "img" + i + ".jpg")));
+                count++;
+            } catch (IOException ex) {
+                //Logger.getLogger(PiLapse.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        double target = 135d, factor = 2d;
+        System.out.println("Calculated Brightness: " + (target - sum/count) + " \t " + ((target - sum/count)/256d/factor + 1));
+        if(sum == 0 || count == 0)
+            return;
+        SHUTTER_SPEED *= (target - sum/count) / 256d / factor + 1;
+        System.out.println("Shutter Speed " + SHUTTER_SPEED);
     }
     
 }
