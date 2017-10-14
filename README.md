@@ -37,7 +37,7 @@ On the Raspbarry Pi:
 While still in the `raspi-config` menu
  + Select `4 Localisation Options` and hit `Enter`
  + Select `I1 Change Locale` and hit `Enter`
- + Navigate down to `en_DK ISO-8859-1` and hit `Enter`
+ + Navigate to `en_DK UTF-8` and hit `Enter` to select
  + Select `en_GB.UTF-8` and hit `Enter`
  + Wait, this may take a while
  
@@ -48,6 +48,18 @@ While still in the `raspi-config` menu
  + Select `Europe` and hit `Enter`
  + Select `Copenhagen` and hit `Enter`
  
+### Change Keyboard Layout
+While still in the `raspi-config` menu
+ + Select `4 Localisation Options` and hit `Enter`
+ + Select `I3 Change Keyboard Layout` and hit `Enter`
+ + Select `Generic 105-key (Intl) PC` and hit `Enter`
+ + Select `Other` and hit `Enter`
+ + Select `Danish` and hit `Enter`
+ + Select `Danish` again and hit `Enter`
+ + Select `The default for the keyboard layout` and hit `Enter`
+ + Select `No compose key` and hit `Enter`
+ + The keyboard layout settings are now updated, but not appear changed until after a reboot
+
 ### Enable Camera
 While still in the `raspi-config` menu
  + Select `5 Interfacing Options` and hit `Enter`
